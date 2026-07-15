@@ -1,0 +1,10 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Entornos y temporales
+.gemini/
+.idea/
+.vscode/
+node_modules/

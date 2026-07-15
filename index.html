@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mecanismo de Anticitera | Computadora Analógica Antigua</title>
+    <meta name="description" content="Simulador interactivo del Mecanismo de Anticitera, la primera computadora analógica de la historia. Explora sus engranajes y diales astronómicos.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background glow elements -->
+    <div class="glow-bg bg-glow-left"></div>
+    <div class="glow-bg bg-glow-right"></div>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-logo">
+                <svg class="header-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="25" cy="25" r="22" stroke="url(#bronze-grad)" stroke-width="2" stroke-dasharray="6 3"/>
+                    <circle cx="25" cy="25" r="14" stroke="url(#gold-grad)" stroke-width="1.5"/>
+                    <line x1="25" y1="3" x2="25" y2="47" stroke="url(#bronze-grad)" stroke-width="1"/>
+                    <line x1="3" y1="25" x2="47" y2="25" stroke="url(#bronze-grad)" stroke-width="1"/>
+                    <defs>
+                        <linearGradient id="bronze-grad" x1="0" y1="0" x2="50" y2="50">
+                            <stop offset="0%" stop-color="#d9a05b"/>
+                            <stop offset="100%" stop-color="#8c5827"/>
+                        </linearGradient>
+                        <linearGradient id="gold-grad" x1="0" y1="0" x2="50" y2="50">
+                            <stop offset="0%" stop-color="#ffd700"/>
+                            <stop offset="100%" stop-color="#b8860b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="header-title-group">
+                    <h1>MECANISMO DE ANTICITERA</h1>
+                    <span class="greek-subtitle">ΜΗΧΑΝΙΣΜΟΣ ΤΩΝ ΑΝΤΙΚΥΘΗΡΩΝ &bull; c. 150 - 100 a.C.</span>
+                </div>
+            </div>
+            <div class="header-badge">
+                <span class="badge-dot"></span>
+                <span>Primera Computadora Analógica</span>
+            </div>
+        </header>
+
+        <!-- APP CONTENT GRID -->
+        <div class="app-grid">
+            
+            <!-- LEFT COLUMN: CONTROLS & DATE -->
+            <aside class="sidebar-left" aria-label="Controles del Simulador">
+                <div class="card control-card">
+                    <div class="card-header">
+                        <i data-lucide="sliders"></i>
+                        <h2>Panel de Control</h2>
+                    </div>
+                    
+                    <!-- Date Readout -->
+                    <div class="date-readout">
+                        <div class="date-label">FECHA SIMULADA</div>
+                        <div class="date-display" id="date-display">01 ENE 0100 a.C.</div>
+                        <div class="date-sub-display">
+                            <span id="egyptian-date">Mes: Thoth, Día: 1</span>
+                            <span id="cycle-year">Año Ciclo: 1 / 19</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Timeline Slider -->
+                    <div class="control-group">
+                        <label for="time-slider">Línea Temporal (Años)</label>
+                        <input type="range" id="time-slider" min="-150" max="50" value="-100" class="styled-range">
+                        <div class="slider-ticks">
+                            <span>150 a.C.</span>
+                            <span>100 a.C.</span>
+                            <span>50 a.C.</span>
+                            <span>1 d.C.</span>
+                            <span>50 d.C.</span>
+                        </div>
+                    </div>
+
+                    <!-- Playback Controls -->
+                    <div class="playback-controls">
+                        <button id="btn-prev" class="btn btn-secondary" title="Retroceder 1 mes">
+                            <i data-lucide="skip-back"></i>
+                        </button>
+                        <button id="btn-play" class="btn btn-primary" title="Reproducir/Pausar">
+                            <i data-lucide="play" id="play-icon"></i>
+                            <span id="play-text">Iniciar</span>
+                        </button>
+                        <button id="btn-next" class="btn btn-secondary" title="Avanzar 1 mes">
+                            <i data-lucide="skip-forward"></i>
+                        </button>
+                    </div>
+
+                    <!-- Playback Speed -->
+                    <div class="control-group">
+                        <label for="speed-slider">Velocidad de Simulación</label>
+                        <input type="range" id="speed-slider" min="1" max="12" value="4" class="styled-range">
+                        <div class="speed-readout" id="speed-readout">Modo: Estándar (4x)</div>
+                    </div>
+
+                    <!-- Audio Controls -->
+                    <div class="audio-panel">
+                        <div class="audio-label">
+                            <i data-lucide="volume-2" id="volume-icon"></i>
+                            <span>Sonido de Engranajes</span>
+                        </div>
+                        <label class="switch" for="audio-toggle">
+                            <input type="checkbox" id="audio-toggle">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- TACTILE MANIVELA (CRANK) -->
+                <div class="card crank-card">
+                    <div class="card-header">
+                        <i data-lucide="rotate-cw"></i>
+                        <h2>Manivela Manual</h2>
+                    </div>
+                    <div class="crank-container">
+                        <div class="crank-disc" id="crank-disc">
+                            <div class="crank-handle" id="crank-handle"></div>
+                            <div class="crank-core"></div>
+                            <div class="crank-ticks"></div>
+                        </div>
+                        <p class="crank-hint">Arrastra y gira la manivela para avanzar el tiempo manualmente</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CENTER COLUMN: VISUALIZER -->
+            <main class="main-display">
+                <!-- Navigation Tabs -->
+                <nav class="view-tabs" aria-label="Vistas del simulador">
+                    <button class="tab-btn active" id="tab-front" data-view="front">
+                        <i data-lucide="orbit"></i>
+                        <span>Esfera Frontal (Sol y Luna)</span>
+                    </button>
+                    <button class="tab-btn" id="tab-internal" data-view="internal">
+                        <i data-lucide="cpu"></i>
+                        <span>Engranajes Internos (Mecánica)</span>
+                    </button>
+                    <button class="tab-btn" id="tab-back" data-view="back">
+                        <i data-lucide="calendar"></i>
+                        <span>Esferas Traseras (Ciclos)</span>
+                    </button>
+                </nav>
+
+                <!-- CANVAS CONTAINER -->
+                <div class="canvas-wrapper">
+                    <canvas id="antikythera-canvas" width="750" height="600"></canvas>
+                    
+                    <!-- Interactive overlay for loading/status -->
+                    <div class="canvas-loading" id="canvas-loading">
+                        <div class="spinner"></div>
+                        <p>Inicializando calibración del mecanismo...</p>
+                    </div>
+                </div>
+
+                <!-- QUICK EXPLANATION / BANNER -->
+                <div class="quick-info">
+                    <i data-lucide="info"></i>
+                    <p id="quick-view-desc">
+                        <strong>Esfera Frontal:</strong> Muestra la posición del Sol y la Luna en el Zodíaco y el calendario egipcio de 365 días. La pequeña esfera bicolor representa la fase lunar exacta.
+                    </p>
+                </div>
+            </main>
+
+            <!-- RIGHT COLUMN: ASTRONOMICAL DATA & COMPONENT DETAILS -->
+            <aside class="sidebar-right" aria-label="Datos Astronómicos e Información Histórica">
+                <!-- ASTRONOMICAL STATISTICS -->
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <i data-lucide="bar-chart-2"></i>
+                        <h2>Lecturas del Mecanismo</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Longitud Solar</span>
+                            <span class="stat-val" id="val-solar-long">120.4° (Leo)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Longitud Lunar</span>
+                            <span class="stat-val" id="val-lunar-long">45.2° (Tauro)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Fase Lunar</span>
+                            <div class="lunar-phase-status">
+                                <span class="stat-val" id="val-lunar-phase">Creciente (42%)</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ciclo Metónico</span>
+                            <span class="stat-val" id="val-metonic">Mes 12, Año 3</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ciclo de Saros</span>
+                            <span class="stat-val" id="val-saros">Mes 84 (Eclipse C2)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Juegos Olimpíacos</span>
+                            <span class="stat-val" id="val-olympiad">Año 2, Olimp. 170</span>
+                        </div>
+                    </div>
+
+                    <!-- ECLIPSE ALERT STATUS -->
+                    <div class="eclipse-panel" id="eclipse-alert-panel">
+                        <div class="eclipse-icon-container">
+                            <i data-lucide="sun" id="eclipse-icon"></i>
+                        </div>
+                        <div class="eclipse-text">
+                            <div class="eclipse-title" id="eclipse-title">Sin eclipses próximos</div>
+                            <div class="eclipse-desc" id="eclipse-desc">El mecanismo no predice eventos solares o lunares en este mes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC EDUCATION/INFO CARD -->
+                <div class="card info-card">
+                    <div class="card-header">
+                        <i data-lucide="book-open"></i>
+                        <h2>Detalles Técnicos</h2>
+                    </div>
+                    <div class="component-info-body" id="component-info">
+                        <div class="info-placeholder">
+                            <p>Pasa el cursor por los engranajes o diales en la pantalla para analizar su funcionamiento histórico y cantidad de dientes.</p>
+                            <div class="info-graphic">
+                                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" class="floating-svg">
+                                    <circle cx="50" cy="50" r="30" stroke="var(--color-bronze)" stroke-width="2" stroke-dasharray="8 4"/>
+                                    <path d="M50 20 L50 80 M20 50 L80 50" stroke="var(--color-gold-dim)" stroke-width="1.5"/>
+                                    <circle cx="50" cy="50" r="10" fill="var(--color-bronze-dark)" stroke="var(--color-gold)" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>&copy; 2026 Simulación Histórica &bull; Creado para divulgación de la ciencia griega helenística.</p>
+            <div class="footer-links">
+                <span>Fragmentos A-G &bull; Museo Arqueológico Nacional de Atenas</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script Entry -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  antikythera:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: antikythera-simulator:latest
+    container_name: antikythera_app
+    restart: unless-stopped
+    ports:
+      - "8080:80" # Mapea el puerto 80 del contenedor al 8080 del host para desarrollo local
+    
+    # Ejemplo de configuración si usas un Proxy Inverso como Traefik para producción:
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.antikythera.rule=Host(`antikythera.deft.work`)"
+    #   - "traefik.http.routers.antikythera.entrypoints=websecure"
+    #   - "traefik.http.routers.antikythera.tls.certresolver=myresolver"
