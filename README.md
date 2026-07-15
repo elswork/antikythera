@@ -10,6 +10,8 @@ La aplicación permite explorar las órbitas solares y lunares, ver cómo intera
 
 🔗 **Desplegado en:** [https://antikythera.deft.work](https://antikythera.deft.work)
 
+🏛️ **Portal del Proyecto:** [https://anticitera.deft.work](https://anticitera.deft.work)
+
 ---
 
 ## 🏛️ Características Principales

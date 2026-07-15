@@ -891,8 +891,22 @@ input:checked + .switch-slider:before {
     margin-top: 10px;
 }
 
+.app-footer a {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.app-footer a:hover {
+    color: var(--color-gold);
+}
+
 .footer-links {
     display: flex;
+    align-items: center;
     gap: 16px;
 }
 
